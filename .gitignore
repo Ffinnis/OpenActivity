@@ -1,0 +1,16 @@
+# Xcode
+xcuserdata/
+DerivedData/
+build/
+*.xcscmblueprint
+*.xccheckout
+
+# Coverage and profiling
+*.profraw
+*.profdata
+
+# macOS
+.DS_Store
+
+# Node (video and site tooling)
+node_modules/
