@@ -15,7 +15,7 @@ background service into the app that started it — so "what is slowing my Mac d
 [![License: MIT](https://img.shields.io/badge/License-MIT-3DA639)](LICENSE)
 [![Latest release](https://img.shields.io/github/v/release/Ffinnis/OpenActivity?label=download&color=1575F9)](https://github.com/Ffinnis/OpenActivity/releases/latest)
 
-[**Download**](https://github.com/Ffinnis/OpenActivity/releases/latest) · [Website](https://ffinnis.github.io/OpenActivity/) · [Features](#features) · [Install](#install) · [How it works](#how-it-works)
+[**Download**](https://github.com/Ffinnis/OpenActivity/releases/latest) · [Website](https://ffinnis.github.io/OpenActivity/) · [30-second tour](https://ffinnis.github.io/OpenActivity/assets/openactivity-launch.mp4) · [Features](#features) · [Install](#install) · [How it works](#how-it-works)
 
 <br>
 
@@ -82,6 +82,13 @@ Show an icon, one or more figures, small live graphs, or stacked figures — for
 ### Dev servers and open ports, by project
 
 OpenActivity finds development servers, groups them by the project folder they run in (monorepos show as one project with named packages), lists the TCP ports each one holds, and points out the ones that have been idle for hours. Stop one server, a whole project, or every idle server at once — after a confirmation.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/assets/projects-dark.png">
+    <img src=".github/assets/projects-light.png" width="760" alt="Projects page with dev servers grouped by project, their ports and an idle-servers banner">
+  </picture>
+</p>
 
 ### Alerts for misbehaving apps
 
