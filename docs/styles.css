@@ -431,31 +431,6 @@ tbody td:last-child { color: var(--ink); font-weight: 500; }
 .steps h3 { margin: 0; font-size: 19px; }
 .steps p { margin: 6px 0 0; color: var(--ink-soft); max-width: var(--measure); }
 
-.command {
-  grid-column: 2;
-  margin-top: 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  max-width: 760px;
-  padding: 10px 10px 10px 16px;
-  background: var(--ink);
-  border-radius: 12px;
-}
-.command code { background: none; padding: 0; color: #DCE6F5; overflow-x: auto; white-space: nowrap; flex: 1; }
-.copy {
-  appearance: none;
-  border: 0;
-  border-radius: 8px;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-  font: 600 13px/1 var(--text);
-  cursor: pointer;
-  flex: none;
-}
-.copy:hover { background: rgba(255, 255, 255, 0.2); }
-
 .source-note { margin: 8px 0 0; padding-top: 22px; border-top: 1px solid var(--rule); color: var(--ink-soft); }
 
 /* Privacy statement */
@@ -508,7 +483,6 @@ tbody td:last-child { color: var(--ink); font-weight: 500; }
   .row { padding: 0 14px; }
   .steps li { grid-template-columns: 48px minmax(0, 1fr); }
   .steps li::before { font-size: 32px; }
-  .command { grid-column: 1 / -1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

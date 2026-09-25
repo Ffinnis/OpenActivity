@@ -170,7 +170,7 @@
     <section class="install" id="install" aria-labelledby="install-title">
       <div class="section-head">
         <h2 id="install-title">Install</h2>
-        <p>About two minutes. The build is ad-hoc signed and not notarized yet, which is why step three exists.</p>
+        <p>About a minute. OpenActivity is signed and notarized by Apple, so it opens like any app you download.</p>
       </div>
       <ol class="steps">
         <li>
@@ -182,12 +182,8 @@
           <p>Unzip it and drag OpenActivity into your Applications folder.</p>
         </li>
         <li>
-          <h3>Allow the first launch</h3>
-          <p>Open it, then choose Open Anyway in System Settings › Privacy &amp; Security. Or run:</p>
-          <div class="command">
-            <code id="xattr">xattr -dr com.apple.quarantine /Applications/OpenActivity.app</code>
-            <button type="button" class="copy" data-copy="xattr">Copy</button>
-          </div>
+          <h3>Open it</h3>
+          <p>Launch it from Applications or Spotlight. macOS asks once to confirm that it came from the internet; choose Open.</p>
         </li>
       </ol>
       <p class="source-note">Prefer to build it yourself? Clone the repository, open <code>OpenActivity.xcodeproj</code> in Xcode 26 and press ⌘R.</p>

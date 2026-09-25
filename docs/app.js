@@ -1,4 +1,4 @@
-// OpenActivity landing page: the hero fold, the tour, and the copy button.
+// OpenActivity landing page: the hero fold and the tour.
 
 (() => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -172,20 +172,5 @@
   // Warm the tour images once the page is idle so switching is instant.
   window.addEventListener("load", () => {
     Object.values(pages).forEach((page) => { const image = new Image(); image.src = page.src; });
-  });
-
-  // ---------- Copy ----------
-
-  document.querySelectorAll(".copy").forEach((button) => {
-    button.addEventListener("click", async () => {
-      const source = document.getElementById(button.dataset.copy);
-      try {
-        await navigator.clipboard.writeText(source.textContent.trim());
-        button.textContent = "Copied";
-      } catch {
-        button.textContent = "Select and copy";
-      }
-      setTimeout(() => { button.textContent = "Copy"; }, 1800);
-    });
   });
 })();

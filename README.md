@@ -126,11 +126,7 @@ Activity Monitor still has specialist tools OpenActivity does not try to copy, s
 
 1. Download the latest `OpenActivity.zip` from [**Releases**](https://github.com/Ffinnis/OpenActivity/releases/latest).
 2. Unzip it and move **OpenActivity.app** to `/Applications`.
-3. The build is not notarized yet, so the first launch needs one extra step: open it, then go to **System Settings › Privacy & Security** and click **Open Anyway**. Alternatively run:
-
-   ```sh
-   xattr -dr com.apple.quarantine /Applications/OpenActivity.app
-   ```
+3. Open it. The app is signed with a Developer ID and notarized by Apple, so macOS only asks you to confirm that you downloaded it from the internet.
 
 ### Requirements
 
