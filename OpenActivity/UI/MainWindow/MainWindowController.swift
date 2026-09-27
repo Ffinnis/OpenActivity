@@ -31,7 +31,7 @@ final class MainWindowController: NSWindowController, NSWindowDelegate, NSToolba
     private static let searchItem = NSToolbarItem.Identifier("search")
 
     init() {
-        let window = NSWindow(
+        let window = MainWindow(
             contentRect: NSRect(x: 0, y: 0, width: 1120, height: 760),
             styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
             backing: .buffered,
@@ -79,6 +79,23 @@ final class MainWindowController: NSWindowController, NSWindowDelegate, NSToolba
 
     @available(*, unavailable)
     required init?(coder: NSCoder) { fatalError() }
+
+    #if DEBUG
+    /// Demo recordings: smoothly scrolls the current page to its end, or back to the top.
+    func demoScroll(toEnd: Bool) {
+        guard let scrollView = pages[currentPage]?.view as? NSScrollView, let document = scrollView.documentView else { return }
+        let clip = scrollView.contentView
+        let bottom = document.isFlipped ? max(0, document.frame.height - clip.bounds.height) : 0
+        let top = document.isFlipped ? 0 : max(0, document.frame.height - clip.bounds.height)
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = 1.1
+            context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            clip.animator().setBoundsOrigin(NSPoint(x: 0, y: toEnd ? bottom : top))
+        } completionHandler: {
+            scrollView.reflectScrolledClipView(clip)
+        }
+    }
+    #endif
 
     func show(_ page: Metric) {
         currentPage = page
@@ -224,6 +241,12 @@ final class SidebarViewController: NSViewController, NSTableViewDataSource, NSTa
         view = scrollView
     }
 
+    #if DEBUG
+    func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+        UserDefaults.standard.bool(forKey: "debug.appearActive") ? EmphasizedRowView() : nil
+    }
+    #endif
+
     func select(_ page: Metric) {
         guard let index = rows.firstIndex(where: { if case .page(let p) = $0 { return p == page } else { return false } }) else { return }
         isSelecting = true
@@ -341,3 +364,23 @@ private final class SidebarCell: NSTableCellView {
         icon.image = NSImage.symbol(page.symbolName, size: 13, weight: .medium, color: color)
     }
 }
+
+/// The main window. In DEBUG builds `-debug.appearActive YES` draws it as the active window even while
+/// another app is in front, so demo recordings don't depend on keyboard focus.
+private final class MainWindow: NSWindow {
+    #if DEBUG
+    private let appearActive = UserDefaults.standard.bool(forKey: "debug.appearActive")
+    override var isKeyWindow: Bool { appearActive || super.isKeyWindow }
+    override var isMainWindow: Bool { appearActive || super.isMainWindow }
+    #endif
+}
+
+#if DEBUG
+/// Draws the sidebar selection as focused, for `-debug.appearActive` recordings.
+private final class EmphasizedRowView: NSTableRowView {
+    override var isEmphasized: Bool {
+        get { true }
+        set {}
+    }
+}
+#endif

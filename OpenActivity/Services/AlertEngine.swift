@@ -336,6 +336,23 @@ final class AlertEngine: NSObject, UNUserNotificationCenterDelegate, @unchecked 
         return true
     }
 
+    #if DEBUG
+    /// Demo recordings: posts a CPU alert worded exactly like a real one.
+    func postDemoAlert(appName: String, averageCPU: Double) {
+        let body = "It has averaged \(Self.percent(averageCPU)) CPU for the last \(Self.minutes(Self.sustainedWindow))."
+        post(AppAlert(appID: "demo." + appName, appName: appName, metric: .cpu,
+                      title: "\(appName) is keeping the CPU busy", body: body, date: Date()))
+    }
+
+    /// Demo recordings: posts a memory-growth alert worded exactly like a real one.
+    func postDemoMemoryAlert(appName: String, grownGB: Double, nowGB: Double) {
+        let gb = 1_073_741_824.0
+        post(AppAlert(appID: "demo.memory." + appName, appName: appName, metric: .memory,
+                      title: "\(Self.possessive(appName)) memory keeps growing",
+                      body: "Up \(Self.bytes(grownGB * gb)) in the last hour, now \(Self.bytes(nowGB * gb)).", date: Date()))
+    }
+    #endif
+
     // MARK: - Delivery
 
     private func post(_ alert: AppAlert) {

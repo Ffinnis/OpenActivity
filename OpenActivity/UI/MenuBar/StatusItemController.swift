@@ -47,6 +47,18 @@ final class StatusItemController: NSObject, NSPopoverDelegate {
                 self?.showPopover()
             }
         }
+        // Demo recordings: the "popover" remote command toggles the dashboard.
+        NotificationCenter.default.addObserver(forName: Notification.Name("OpenActivityDemo.popover"), object: nil, queue: .main) { [weak self] _ in
+            guard let self else { return }
+            // Pinned open (no transient close, no outside-click monitor) so recordings aren't cut short.
+            if self.popover.isShown {
+                self.closePopover()
+                self.popover.behavior = .transient
+            } else if let button = self.statusItem.button {
+                self.popover.behavior = .applicationDefined
+                self.popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+            }
+        }
         #endif
     }
 

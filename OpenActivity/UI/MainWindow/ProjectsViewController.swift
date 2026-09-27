@@ -41,6 +41,10 @@ final class ProjectsViewController: NSViewController, LivePage, NSOutlineViewDat
 
     override func loadView() {
         let root = NSView()
+        #if DEBUG
+        // Demo recordings: the "stopIdle" remote command presses Stop Idle….
+        NotificationCenter.default.addObserver(self, selector: #selector(stopIdle), name: Notification.Name("OpenActivityDemo.stopIdle"), object: nil)
+        #endif
 
         let header = NSStackView.vertical([summaryTitle, summaryDetail], spacing: 2)
 

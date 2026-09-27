@@ -33,6 +33,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if UserDefaults.standard.bool(forKey: "debug.showSettings") {
             SettingsWindowController.shared.show()
         }
+        // Demo recordings: shell tools drive the UI with a distributed notification named
+        // "roman.potapov.OpenActivity.demo" whose object is "page:cpu", "popover", "stopIdle",
+        // "scroll:end", "scroll:top", "alert:Xcode" or "memalert:Slack".
+        DistributedNotificationCenter.default().addObserver(forName: Notification.Name("roman.potapov.OpenActivity.demo"),
+                                                            object: nil, queue: .main) { [weak self] note in
+            guard let command = note.object as? String else { return }
+            let parts = command.split(separator: ":", maxSplits: 1).map(String.init)
+            switch parts[0] {
+            case "page": if parts.count == 2, let page = Metric(rawValue: parts[1]) { self?.mainWindowController?.show(page) }
+            case "alert": if parts.count == 2 { AlertEngine.shared.postDemoAlert(appName: parts[1], averageCPU: 87) }
+            case "memalert": if parts.count == 2 { AlertEngine.shared.postDemoMemoryAlert(appName: parts[1], grownGB: 2.4, nowGB: 3.9) }
+            case "scroll": self?.mainWindowController?.demoScroll(toEnd: parts.count < 2 || parts[1] != "top")
+            default: NotificationCenter.default.post(name: Notification.Name("OpenActivityDemo.\(parts[0])"), object: nil)
+            }
+        }
         #endif
     }
 

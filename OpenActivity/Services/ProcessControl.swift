@@ -138,6 +138,15 @@ enum ProcessControl {
     private static func present(_ alert: NSAlert, window: NSWindow?, handler: @escaping (NSApplication.ModalResponse) -> Void) {
         if let window, window.isVisible {
             alert.beginSheetModal(for: window, completionHandler: handler)
+            #if DEBUG
+            // Demo recordings: `-debug.autoConfirmAfter 1.4` presses the first button after that many seconds.
+            let confirmAfter = UserDefaults.standard.double(forKey: "debug.autoConfirmAfter")
+            if confirmAfter > 0 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + confirmAfter) {
+                    window.endSheet(alert.window, returnCode: .alertFirstButtonReturn)
+                }
+            }
+            #endif
         } else {
             NSApp.activate(ignoringOtherApps: true)
             handler(alert.runModal())
