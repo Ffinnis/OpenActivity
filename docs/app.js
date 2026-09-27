@@ -1,176 +1,128 @@
-// OpenActivity landing page: the hero fold and the tour.
+// OpenActivity landing page: nav state, scroll reveals, counters, the tour, and two small loops.
 
 (() => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // ---------- The fold ----------
-  // An illustrative slice of a busy Mac: first as Activity Monitor lists it, then filed by app.
+  // ---------- Nav ----------
+  const nav = document.querySelector(".nav");
+  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 24);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
 
-  const processes = [
-    ["Safari Web Content", "612 MB"],
-    ["SourceKitService", "1.1 GB"],
-    ["Slack Helper (Renderer)", "486 MB"],
-    ["com.docker.backend", "1.4 GB"],
-    ["node", "391 MB"],
-    ["Safari Web Content", "388 MB"],
-    ["Xcode", "1.6 GB"],
-    ["mds_stores", "214 MB"],
-    ["Slack Helper (GPU)", "198 MB"],
-    ["zsh", "12 MB"],
-    ["Music", "243 MB"],
-    ["com.apple.WebKit.Networking", "94 MB"],
-  ];
-
-  const apps = [
-    ["Xcode", 11, "3.1 GB", "#30B0C7"],
-    ["Safari", 14, "2.4 GB", "#1575F9"],
-    ["Docker", 9, "2.2 GB", "#FF9500"],
-    ["Slack", 9, "1.2 GB", "#AF52DE"],
-    ["Terminal", 6, "640 MB", "#5B6275"],
-    ["Mail", 5, "420 MB", "#30D158"],
-    ["Music", 4, "310 MB", "#FF2D55"],
-    ["macOS", 612, "3.9 GB", "#8E8E93"],
-  ];
-
-  const list = document.querySelector(".rows");
-  const buttons = document.querySelectorAll(".switch button");
-  let view = "processes";
-  let busy = false;
-
-  function row(markup, className, index) {
-    const item = document.createElement("li");
-    item.className = `row ${className}`;
-    item.innerHTML = markup;
-    if (!reduceMotion) {
-      item.style.opacity = "0";
-      item.style.transform = "translateY(10px)";
-      item.style.transitionDelay = `${index * 45}ms`;
-    }
-    return item;
-  }
-
-  function render(next) {
-    list.replaceChildren();
-    if (next === "processes") {
-      processes.forEach(([name, memory], index) => {
-        list.append(row(
-          `<span class="mark" aria-hidden="true"></span><span class="name">${name}</span><span class="figure">${memory}</span>`,
-          "process", index));
+  // ---------- Reveal on scroll ----------
+  const reveals = document.querySelectorAll(".reveal");
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    reveals.forEach((el) => el.classList.add("in"));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        // Stagger siblings that enter together.
+        const siblings = [...el.parentElement.children].filter((c) => c.classList.contains("reveal"));
+        el.style.transitionDelay = `${(siblings.indexOf(el) % 4) * 80}ms`;
+        el.classList.add("in");
+        io.unobserve(el);
       });
-    } else {
-      apps.forEach(([name, count, memory, color], index) => {
-        const item = row(
-          `<span class="mark" aria-hidden="true"></span><span class="name">${name}<span class="count">${count} processes</span></span><span class="figure">${memory}</span>`,
-          "app", index);
-        item.style.setProperty("--c", color);
-        list.append(item);
-      });
-    }
-    if (!reduceMotion) {
-      // Next frame, so the transition starts from the offset state.
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        list.querySelectorAll(".row").forEach((item) => {
-          item.style.opacity = "";
-          item.style.transform = "";
-        });
-      }));
-    }
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
+    reveals.forEach((el) => io.observe(el));
   }
 
-  function show(next) {
-    if (next === view || busy) return;
-    view = next;
-    buttons.forEach((button) => button.setAttribute("aria-checked", String(button.dataset.view === next)));
-    if (reduceMotion) {
-      render(next);
-      return;
-    }
-    busy = true;
-    list.classList.add("leaving");
-    setTimeout(() => {
-      list.classList.remove("leaving");
-      render(next);
-      busy = false;
-    }, 320);
-  }
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => show(button.dataset.view));
-    button.addEventListener("keydown", (event) => {
-      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-      event.preventDefault();
-      const other = [...buttons].find((candidate) => candidate !== button);
-      other.focus();
-      show(other.dataset.view);
-    });
-  });
-
-  render("processes");
-  // The page's one orchestrated moment: fold the list once, shortly after load.
-  if (!reduceMotion) setTimeout(() => show("apps"), 1800);
-
-  // ---------- The tour ----------
-
-  const pages = {
-    overview: {
-      title: "Overview",
-      text: "CPU, memory, GPU, disk, network and energy on one screen, each with a live graph, plus where your memory and power are going.",
-      src: "assets/overview-light.webp",
-      alt: "The Overview page: six metric cards with live graphs, memory by type, memory by app and power by app.",
-    },
-    cpu: {
-      title: "CPU",
-      text: "Load split into user and system, every core, today’s average and peak, and the apps behind it, one row each with its process count.",
-      src: "assets/cpu-light.webp",
-      alt: "The CPU page: load cards, a per-core chart, a live CPU graph and a table of apps with their process counts.",
-    },
-    memory: {
-      title: "Memory",
-      text: "The split macOS itself uses — app, wired, compressed, cached, free — plus pressure, swap and each app’s real footprint.",
-      src: "assets/memory-light.webp",
-      alt: "The Memory page: memory in use, a breakdown by type, swap, a memory graph and apps sorted by memory.",
-    },
-    projects: {
-      title: "Projects",
-      text: "Dev servers grouped by the project folder they run in, with their ports. Servers that have sat idle for hours are pointed out, and stopping them asks first.",
-      src: "assets/projects-light.webp",
-      alt: "The Projects page: an idle-servers banner and four projects with node and python servers, their ports and Stop buttons.",
-    },
-    sensors: {
-      title: "Sensors",
-      text: "CPU and GPU temperatures, fan speeds, and the battery of your AirPods, Magic Mouse, Keyboard and Trackpad.",
-      src: "assets/sensors-light.webp",
-      alt: "The Sensors page: CPU and GPU temperatures, fan speeds, a temperature chart and accessory batteries.",
-    },
-    menubar: {
-      title: "Menu bar",
-      text: "A compact dashboard one click from the menu bar: every metric with a small graph, the busiest apps right now, and a tab for each page.",
-      src: "assets/popover-light.webp",
-      alt: "The menu bar dashboard: CPU, memory, network, disk, GPU and battery rows with small graphs, and the busiest apps.",
-      small: true,
-    },
+  // ---------- Counters ----------
+  const counters = document.querySelectorAll("[data-count]");
+  const runCounter = (el) => {
+    const target = Number(el.dataset.count);
+    if (reduceMotion || target === 0) { el.textContent = String(target); return; }
+    const start = performance.now();
+    const duration = 1400;
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = String(Math.round(target * eased));
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
   };
+  if ("IntersectionObserver" in window) {
+    const cio = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        runCounter(entry.target);
+        cio.unobserve(entry.target);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach((el) => cio.observe(el));
+  } else {
+    counters.forEach(runCounter);
+  }
 
-  const pageButtons = document.querySelectorAll(".page");
-  const title = document.getElementById("page-title");
-  const text = document.getElementById("page-text");
-  const shot = document.getElementById("page-shot");
+  // ---------- Hero: the fold fragment folds and unfolds ----------
+  const fold = document.querySelector(".float-fold");
+  const foldCount = document.getElementById("fold-count");
+  if (fold && !reduceMotion) {
+    let folded = false;
+    setInterval(() => {
+      folded = !folded;
+      fold.classList.toggle("folded", folded);
+      foldCount.textContent = folded ? "1 row" : "14 processes";
+    }, 3200);
+  }
 
-  pageButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const page = pages[button.dataset.page];
-      pageButtons.forEach((other) => other.setAttribute("aria-pressed", String(other === button)));
-      title.textContent = page.title;
-      text.textContent = page.text;
-      shot.src = page.src;
-      shot.alt = page.alt;
-      document.getElementById("page-shot-link").href = page.src;
-      shot.closest(".shot").classList.toggle("small", Boolean(page.small));
+  // ---------- Bento: the app row opens and closes ----------
+  const rowDemo = document.getElementById("row-demo");
+  if (rowDemo && !reduceMotion) {
+    setTimeout(() => rowDemo.classList.add("open"), 1200);
+    setInterval(() => rowDemo.classList.toggle("open"), 4200);
+  } else if (rowDemo) {
+    rowDemo.classList.add("open");
+  }
+
+  // ---------- Tour ----------
+  const shots = {
+    cpu: { src: "assets/cpu-light.webp", alt: "The CPU page: load now and today, a bar for every core, a live chart and apps sorted by CPU with their process counts.", caption: "Load split into user and system, every core, today’s average and peak, and the apps behind it." },
+    memory: { src: "assets/memory-light.webp", alt: "The Memory page: memory in use, a breakdown by type, swap, a memory graph and apps sorted by memory.", caption: "The split macOS itself uses, plus pressure, swap, and each app’s real footprint." },
+    projects: { src: "assets/projects-light.webp", alt: "The Projects page: an idle-servers banner and four projects with node and python servers, their ports and Stop buttons.", caption: "Dev servers grouped by project with their ports. Idle ones are pointed out; stopping them asks first." },
+    sensors: { src: "assets/sensors-light.webp", alt: "The Sensors page: CPU and GPU temperatures, fan speeds, a temperature chart and accessory batteries.", caption: "CPU and GPU temperatures, fan speeds, and the battery of your AirPods, mouse, keyboard and trackpad." },
+    settings: { src: "assets/settings-light.webp", alt: "The Settings window: menu bar options, alert thresholds, history retention and launch at login.", caption: "Menu bar style, alert thresholds, history retention and launch at login. Everything is optional." },
+  };
+  const tabs = document.querySelectorAll(".tour-tabs button");
+  const tourImg = document.getElementById("tour-img");
+  const tourCaption = document.getElementById("tour-caption");
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const shot = shots[tab.dataset.shot];
+      tabs.forEach((other) => other.setAttribute("aria-selected", String(other === tab)));
+      tourCaption.textContent = shot.caption;
+      if (reduceMotion) { tourImg.src = shot.src; tourImg.alt = shot.alt; return; }
+      tourImg.classList.add("swapping");
+      const next = new Image();
+      next.src = shot.src;
+      const swap = () => { tourImg.src = shot.src; tourImg.alt = shot.alt; requestAnimationFrame(() => tourImg.classList.remove("swapping")); };
+      next.decode ? next.decode().then(swap, swap) : (next.onload = swap);
     });
   });
-
-  // Warm the tour images once the page is idle so switching is instant.
   window.addEventListener("load", () => {
-    Object.values(pages).forEach((page) => { const image = new Image(); image.src = page.src; });
+    Object.values(shots).forEach((shot) => { const img = new Image(); img.src = shot.src; });
   });
+
+  // ---------- Hero mockup: a gentle tilt that follows the cursor ----------
+  const mockup = document.getElementById("mockup");
+  const visual = document.querySelector(".hero-visual");
+  if (mockup && visual && !reduceMotion && window.matchMedia("(hover: hover)").matches) {
+    let raf = 0;
+    visual.addEventListener("mousemove", (event) => {
+      const r = visual.getBoundingClientRect();
+      const x = (event.clientX - r.left) / r.width - 0.5;
+      const y = (event.clientY - r.top) / r.height - 0.5;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        mockup.style.transition = "transform 0.4s cubic-bezier(0.22,1,0.36,1)";
+        mockup.style.transform = `rotateY(${x * 4}deg) rotateX(${-y * 4}deg)`;
+      });
+    });
+    visual.addEventListener("mouseleave", () => {
+      mockup.style.transition = "transform 0.8s cubic-bezier(0.22,1,0.36,1)";
+      mockup.style.transform = "";
+    });
+  }
 })();

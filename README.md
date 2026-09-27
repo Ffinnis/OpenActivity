@@ -15,7 +15,7 @@ background service into the app that started it — so "what is slowing my Mac d
 [![License: MIT](https://img.shields.io/badge/License-MIT-3DA639)](LICENSE)
 [![Latest release](https://img.shields.io/github/v/release/Ffinnis/OpenActivity?label=download&color=1575F9)](https://github.com/Ffinnis/OpenActivity/releases/latest)
 
-[**Download**](https://github.com/Ffinnis/OpenActivity/releases/latest) · [Website](https://ffinnis.github.io/OpenActivity/) · [30-second tour](https://ffinnis.github.io/OpenActivity/assets/openactivity-launch.mp4) · [Features](#features) · [Install](#install) · [How it works](#how-it-works)
+[**Download**](https://github.com/Ffinnis/OpenActivity/releases/latest) · [Website](https://ffinnis.github.io/OpenActivity/) · [Launch film](https://ffinnis.github.io/OpenActivity/assets/openactivity-launch.mp4) · [Features](#features) · [Install](#install) · [How it works](#how-it-works)
 
 <br>
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OpenActivity — see your Mac by app, not by process</title>
   <meta name="description" content="OpenActivity is a free, open-source activity monitor for macOS. It folds every helper process into the app that started it, keeps 30 days of history, lives in your menu bar and finds the dev servers you forgot.">
-  <meta name="theme-color" content="#EDF0F4">
+  <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/icon.png">
   <meta property="og:type" content="website">
@@ -16,192 +16,299 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <header class="top">
-    <a class="brand" href="./" aria-label="OpenActivity home">
-      <img src="assets/icon.png" width="32" height="32" alt="">
-      <span>OpenActivity</span>
-    </a>
-    <nav aria-label="Primary">
-      <a href="#tour">Tour</a>
-      <a href="#install">Install</a>
-      <a href="https://github.com/Ffinnis/OpenActivity">GitHub</a>
+  <header class="nav-wrap">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="./" aria-label="OpenActivity home">
+        <img src="assets/icon.png" width="28" height="28" alt="">
+        <span>OpenActivity</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#tour">Tour</a>
+        <a href="#compare">Compare</a>
+        <a href="#install">Install</a>
+      </div>
+      <div class="nav-actions">
+        <a class="nav-github" href="https://github.com/Ffinnis/OpenActivity" aria-label="OpenActivity on GitHub">
+          <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <a class="button primary sm" href="https://github.com/Ffinnis/OpenActivity/releases/latest">Download</a>
+      </div>
     </nav>
   </header>
 
   <main id="main">
-    <!-- Hero: the product's thesis, played once and then yours to toggle. -->
-    <section class="hero" aria-labelledby="hero-title">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="aurora" aria-hidden="true"></div>
       <div class="hero-copy">
-        <h1 id="hero-title">Your Mac, counted by&nbsp;app.</h1>
-        <p class="lede">Activity Monitor lists every process. OpenActivity files each helper, renderer and background service under the app that started it, so “what is slowing my Mac down?” has a one-line answer.</p>
+        <a class="pill" href="https://github.com/Ffinnis/OpenActivity/releases/latest">
+          <span class="pill-dot"></span>
+          Free and open source for macOS 15+
+        </a>
+        <h1>Know which app is slowing your Mac down.</h1>
+        <p class="lede">OpenActivity folds every helper, renderer and background service into the app that started it. Nine hundred processes become the seventy-eight apps you actually run.</p>
         <div class="actions">
-          <a class="button primary" href="https://github.com/Ffinnis/OpenActivity/releases/latest">Download for macOS</a>
-          <a class="button" href="https://github.com/Ffinnis/OpenActivity">View the source</a>
+          <a class="button primary lg" href="https://github.com/Ffinnis/OpenActivity/releases/latest">
+            <svg viewBox="0 0 17 20" width="16" height="19" aria-hidden="true"><path fill="currentColor" d="M14.1 10.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.2-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.6-1-2.6-3.8zM11.7 3.4c.7-.8 1.1-1.9 1-3-1 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.5 2.8-1.3z"/></svg>
+            Download for macOS
+          </a>
+          <a class="button ghost lg" href="https://github.com/Ffinnis/OpenActivity">View on GitHub</a>
         </div>
-        <p class="fine">Free and open source under the MIT license. macOS 15 Sequoia or later.</p>
+        <p class="fine">Signed and notarized by Apple. No account, no analytics, nothing leaves your Mac.</p>
       </div>
 
-      <figure class="fold" aria-labelledby="fold-caption">
-        <div class="fold-bar">
-          <div class="switch" role="radiogroup" aria-label="Count this Mac by">
-            <button type="button" role="radio" aria-checked="true" data-view="processes">
-              <span class="switch-num" data-count="919">919</span> processes
-            </button>
-            <button type="button" role="radio" aria-checked="false" data-view="apps">
-              <span class="switch-num" data-count="78">78</span> apps
-            </button>
+      <div class="hero-visual">
+        <div class="mockup" id="mockup">
+          <img src="assets/overview-light.webp" width="2376" height="1656" alt="The OpenActivity Overview page: CPU, memory, GPU, disk, network and energy cards with live graphs, plus memory and power by app." fetchpriority="high">
+        </div>
+
+        <div class="float float-notice" aria-hidden="true">
+          <img src="assets/icon.png" width="36" height="36" alt="">
+          <div>
+            <strong>Docker is keeping the CPU busy</strong>
+            <span>68% for the last 5 minutes, 9 processes</span>
           </div>
         </div>
-        <ol class="rows" aria-live="polite"></ol>
-        <figcaption id="fold-caption">An illustrative slice. On the MacBook Pro that made the video, 919 processes came down to 78 apps.</figcaption>
-      </figure>
+
+        <div class="float float-fold" aria-hidden="true">
+          <div class="fold-head"><span>Safari</span><em id="fold-count">14 processes</em></div>
+          <ul class="fold-rows" id="fold-rows">
+            <li><i style="--c:#1575F9"></i>Safari Web Content<b>612 MB</b></li>
+            <li><i style="--c:#1575F9"></i>Safari Web Content<b>388 MB</b></li>
+            <li><i style="--c:#1575F9"></i>com.apple.WebKit.Networking<b>94 MB</b></li>
+            <li><i style="--c:#1575F9"></i>com.apple.WebKit.GPU<b>72 MB</b></li>
+            <li><i style="--c:#1575F9"></i>Safari Web Content<b>61 MB</b></li>
+          </ul>
+          <div class="fold-total"><i style="--c:#1575F9"></i>Safari<b>2.4 GB</b></div>
+        </div>
+
+        <div class="float float-stat" aria-hidden="true">
+          <span class="stat-label">Memory pressure</span>
+          <span class="stat-value">Normal</span>
+          <svg class="spark" viewBox="0 0 120 32" preserveAspectRatio="none"><path d="M0 22 L12 20 L24 24 L36 14 L48 18 L60 10 L72 16 L84 8 L96 12 L108 6 L120 10" /></svg>
+        </div>
+      </div>
     </section>
 
-    <!-- Launch video on the deep stage. -->
-    <section class="stage" aria-labelledby="stage-title">
-      <div class="stage-inner">
-        <div class="stage-copy">
-          <h2 id="stage-title">Thirty seconds, real screens.</h2>
-          <p>Everything in the film is the app running on a real Mac: the overview, the per-app CPU table, the dev servers it caught idling, and the dashboard in the menu bar.</p>
+    <!-- Numbers -->
+    <section class="numbers reveal" aria-label="At a glance">
+      <div><b data-count="919">0</b><span>processes on a working Mac</span></div>
+      <div><b data-count="78">0</b><span>apps OpenActivity shows instead</span></div>
+      <div><b data-count="30">0</b><span>days of history, per app</span></div>
+      <div><b data-count="0">0</b><span>network requests, ever</span></div>
+    </section>
+
+    <!-- Features bento -->
+    <section class="section" id="features">
+      <div class="section-head reveal">
+        <h2>Everything Activity Monitor doesn’t tell you.</h2>
+        <p>One row per app, thirty days of memory, a menu bar that warns you, and the dev servers you forgot about.</p>
+      </div>
+
+      <div class="bento">
+        <article class="card card-wide reveal" style="--tint:#1575F9">
+          <div class="card-copy">
+            <h3>Grouped by app</h3>
+            <p>Chrome’s renderers count toward Chrome. A shell and everything it runs count toward Terminal. Expand any app to see its processes, and quit either one from any list.</p>
+          </div>
+          <div class="card-art art-rows" aria-hidden="true">
+            <div class="row-demo" id="row-demo">
+              <div class="rd-app"><i></i><span>Slack</span><em>9 processes</em><b>1.2 GB</b></div>
+              <div class="rd-procs">
+                <div><span>Slack Helper (Renderer)</span><b>486 MB</b></div>
+                <div><span>Slack</span><b>241 MB</b></div>
+                <div><span>Slack Helper (GPU)</span><b>198 MB</b></div>
+                <div><span>Slack Helper (Renderer)</span><b>117 MB</b></div>
+                <div><span>Slack Helper (Plugin)</span><b>23 MB</b></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal" style="--tint:#AF52DE">
+          <div class="card-copy">
+            <h3>Thirty days of history</h3>
+            <p>Every metric charted for 12 hours, 24 hours, 7 days or 30 days, with the apps that used the most.</p>
+          </div>
+          <div class="card-art art-chart" aria-hidden="true">
+            <svg viewBox="0 0 300 110" preserveAspectRatio="none">
+              <defs><linearGradient id="g-purple" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#AF52DE" stop-opacity=".35"/><stop offset="1" stop-color="#AF52DE" stop-opacity="0"/></linearGradient></defs>
+              <path class="area" fill="url(#g-purple)" d="M0 70 C20 60 30 40 50 46 S80 80 100 62 S140 30 160 40 S200 70 220 52 S260 20 300 30 V110 H0 Z"/>
+              <path class="line" d="M0 70 C20 60 30 40 50 46 S80 80 100 62 S140 30 160 40 S200 70 220 52 S260 20 300 30"/>
+            </svg>
+            <div class="chart-legend"><span>Cursor 5.9 GB</span><span>Xcode 4.7 GB</span><span>Docker 2.8 GB</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal" style="--tint:#30B0C7">
+          <div class="card-copy">
+            <h3>Lives in your menu bar</h3>
+            <p>Figures, small graphs or an icon that turns into a warning sign when your Mac is under strain.</p>
+          </div>
+          <div class="card-art art-menubar" aria-hidden="true">
+            <div class="menubar">
+              <span class="mb-item"><svg viewBox="0 0 16 16" width="14" height="14"><path fill="currentColor" d="M1 9h3l2-5 3 8 2-4h4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> 24%</span>
+              <span class="mb-item">46.5 GB</span>
+              <span class="mb-item">↓ 15 kB/s</span>
+              <span class="mb-item mb-time">Tue 09:41</span>
+            </div>
+            <img src="assets/popover-light.webp" width="432" height="508" loading="lazy" alt="">
+          </div>
+        </article>
+
+        <article class="card card-wide reveal" style="--tint:#A2845E">
+          <div class="card-copy">
+            <h3>Dev servers, by project</h3>
+            <p>Node, Python, Go, Ruby and Bun servers, grouped by the folder they run in, with their ports. Idle ones are flagged. Stop one, a project, or every idle server at once.</p>
+          </div>
+          <div class="card-art art-servers" aria-hidden="true">
+            <div class="server"><span class="srv-name">atlas-web</span><span class="srv-tag">node</span><span class="srv-port">:5173</span><span class="srv-idle">idle 11 min</span><span class="srv-stop">Stop</span></div>
+            <div class="server"><span class="srv-name">ledger-service</span><span class="srv-tag py">python</span><span class="srv-port">:8000</span><span class="srv-idle">idle 3 h</span><span class="srv-stop">Stop</span></div>
+            <div class="server"><span class="srv-name">pixel-pipeline</span><span class="srv-tag py">python</span><span class="srv-port">:8888</span><span class="srv-idle">idle 5 h</span><span class="srv-stop">Stop</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal" style="--tint:#FF9500">
+          <div class="card-copy">
+            <h3>Alerts that mean something</h3>
+            <p>A notification when an app pins the CPU, keeps growing, hammers the disk or saturates the network. You set the thresholds.</p>
+          </div>
+        </article>
+
+        <article class="card reveal" style="--tint:#30D158">
+          <div class="card-copy">
+            <h3>Volume per app</h3>
+            <p>Turn one app down or mute it without touching the others. Nothing is recorded.</p>
+          </div>
+          <div class="card-art art-volume" aria-hidden="true">
+            <div class="vol"><span>Music</span><i style="--v:70%"></i></div>
+            <div class="vol"><span>Safari</span><i style="--v:45%"></i></div>
+            <div class="vol muted"><span>Slack</span><i style="--v:0%"></i><em>Muted</em></div>
+          </div>
+        </article>
+
+        <article class="card reveal" style="--tint:#FF3B30">
+          <div class="card-copy">
+            <h3>Sensors, fans and batteries</h3>
+            <p>CPU and GPU temperatures, fan speeds, and the battery in your AirPods, mouse and keyboard.</p>
+          </div>
+          <div class="card-art art-sensors" aria-hidden="true">
+            <div class="gauge"><span>CPU</span><i style="--v:56%; --c:#FF3B30"></i><b>56°</b></div>
+            <div class="gauge"><span>GPU</span><i style="--v:52%; --c:#FF3B30"></i><b>52°</b></div>
+            <div class="gauge"><span>AirPods</span><i style="--v:82%; --c:#30D158"></i><b>82%</b></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Tour -->
+    <section class="section tour" id="tour">
+      <div class="section-head reveal">
+        <h2>Every page, real data.</h2>
+        <p>Screens from a MacBook Pro running OpenActivity, not mock-ups.</p>
+      </div>
+
+      <div class="tour-tabs reveal" role="tablist" aria-label="Pages">
+        <button role="tab" aria-selected="true" data-shot="cpu">CPU</button>
+        <button role="tab" aria-selected="false" data-shot="memory">Memory</button>
+        <button role="tab" aria-selected="false" data-shot="projects">Projects</button>
+        <button role="tab" aria-selected="false" data-shot="sensors">Sensors</button>
+        <button role="tab" aria-selected="false" data-shot="settings">Settings</button>
+      </div>
+      <div class="tour-frame reveal">
+        <img id="tour-img" src="assets/cpu-light.webp" width="2376" height="1656" loading="lazy" alt="The CPU page: load now and today, a bar for every core, a live chart and apps sorted by CPU with their process counts.">
+      </div>
+      <p class="tour-caption" id="tour-caption">Load split into user and system, every core, today’s average and peak, and the apps behind it.</p>
+    </section>
+
+    <!-- Video -->
+    <section class="section film-section">
+      <div class="film-inner reveal">
+        <div class="film-copy">
+          <h2>Forty seconds, all of it real.</h2>
+          <p>Recorded from the app running on a Mac: the overview filling in live, the per-app CPU table, idle dev servers stopped in one click, the alerts, and the dashboard in the menu bar.</p>
         </div>
-        <div class="video-frame">
-          <video src="assets/openactivity-launch.mp4" poster="assets/openactivity-launch-poster.jpg" controls playsinline preload="metadata" width="1080" height="1080">
-            Your browser can't play this video. <a href="assets/openactivity-launch.mp4">Download it</a>.
+        <div class="film">
+          <video src="assets/openactivity-launch.mp4" poster="assets/openactivity-launch-poster.jpg" controls playsinline preload="metadata" width="1920" height="1080">
+            Your browser can’t play this video. <a href="assets/openactivity-launch.mp4">Download it</a>.
           </video>
         </div>
       </div>
     </section>
 
-    <!-- Tour: navigation mirrors the app's own sidebar. -->
-    <section class="tour" id="tour" aria-labelledby="tour-title">
-      <div class="section-head">
-        <h2 id="tour-title">Take the tour</h2>
-        <p>Pick a page the way you would in the app.</p>
+    <!-- Compare -->
+    <section class="section" id="compare">
+      <div class="section-head reveal">
+        <h2>Next to Activity Monitor.</h2>
+        <p>Activity Monitor is great at this second, one process at a time. OpenActivity adds who is responsible, what happened while you were away, and when to look.</p>
       </div>
-      <div class="tour-body">
-        <nav class="sidebar" aria-label="App pages">
-          <p class="sidebar-group">Monitor</p>
-          <button type="button" class="page" aria-pressed="true" data-page="overview" style="--dot:#1575F9">Overview</button>
-          <button type="button" class="page" aria-pressed="false" data-page="cpu" style="--dot:#1575F9">CPU</button>
-          <button type="button" class="page" aria-pressed="false" data-page="memory" style="--dot:#AF52DE">Memory</button>
-          <p class="sidebar-group">Mac</p>
-          <button type="button" class="page" aria-pressed="false" data-page="projects" style="--dot:#A2845E">Projects</button>
-          <button type="button" class="page" aria-pressed="false" data-page="sensors" style="--dot:#FF3B30">Sensors</button>
-          <button type="button" class="page" aria-pressed="false" data-page="menubar" style="--dot:#30B0C7">Menu bar</button>
-        </nav>
-        <div class="viewer">
-          <div class="viewer-text">
-            <h3 id="page-title">Overview</h3>
-            <p id="page-text">CPU, memory, GPU, disk, network and energy on one screen, each with a live graph, plus where your memory and power are going.</p>
+      <div class="compare reveal">
+        <div class="compare-head"><span></span><span>Activity Monitor</span><span class="hl">OpenActivity</span></div>
+        <div class="compare-row"><span>The list shows</span><span>Every process</span><span class="hl">Every app, helpers included</span></div>
+        <div class="compare-row"><span>History</span><span>Live graphs</span><span class="hl">30 days, per app</span></div>
+        <div class="compare-row"><span>Alerts</span><span class="no">None</span><span class="hl">CPU, memory, disk, network</span></div>
+        <div class="compare-row"><span>Menu bar</span><span>Dock icon graphs</span><span class="hl">Figures, graphs and a dashboard</span></div>
+        <div class="compare-row"><span>Dev servers and ports</span><span class="no">None</span><span class="hl">By project, idle ones flagged</span></div>
+        <div class="compare-row"><span>Temperatures and fans</span><span class="no">None</span><span class="hl">Included</span></div>
+        <div class="compare-row"><span>Volume per app</span><span class="no">None</span><span class="hl">Included</span></div>
+        <div class="compare-row"><span>Source code</span><span>Closed</span><span class="hl">MIT licensed</span></div>
+      </div>
+    </section>
+
+    <!-- Privacy -->
+    <section class="section privacy">
+      <div class="privacy-inner reveal">
+        <div class="lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26"><rect x="4" y="10" width="16" height="11" rx="3" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
+        </div>
+        <h2>What you run stays on your Mac.</h2>
+        <p>No account, no analytics, no update checks. OpenActivity doesn’t make a single network request of its own. History is one SQLite file you can delete from Settings.</p>
+      </div>
+    </section>
+
+    <!-- Install -->
+    <section class="section install" id="install">
+      <div class="install-card reveal">
+        <div class="install-copy">
+          <h2>Install in about a minute.</h2>
+          <ol class="steps">
+            <li><span>1</span><div><b>Download</b> <code>OpenActivity.zip</code> from the latest release.</div></li>
+            <li><span>2</span><div><b>Drag</b> OpenActivity into your Applications folder.</div></li>
+            <li><span>3</span><div><b>Open it.</b> macOS asks once to confirm the download; choose Open.</div></li>
+          </ol>
+          <div class="actions">
+            <a class="button primary lg" href="https://github.com/Ffinnis/OpenActivity/releases/latest">Download for macOS</a>
+            <a class="button ghost lg" href="https://github.com/Ffinnis/OpenActivity#building-from-source">Build from source</a>
           </div>
-          <div class="shot">
-            <a id="page-shot-link" href="assets/overview-light.webp" aria-label="Open the screenshot full size">
-              <img id="page-shot" src="assets/overview-light.webp" width="2376" height="1656" alt="The Overview page: six metric cards with live graphs, memory by type, memory by app and power by app.">
-            </a>
-          </div>
+          <p class="fine">macOS 15 Sequoia or later. Apple silicon recommended. MIT licensed.</p>
+        </div>
+        <div class="install-art" aria-hidden="true">
+          <img src="assets/icon.png" width="160" height="160" alt="">
         </div>
       </div>
-    </section>
-
-    <!-- What it does, in plain words. -->
-    <section class="does" aria-labelledby="does-title">
-      <div class="section-head">
-        <h2 id="does-title">What it does</h2>
-      </div>
-      <dl class="spec">
-        <div>
-          <dt>Groups processes by app</dt>
-          <dd>Chrome’s renderers count toward Chrome, a shell and everything it runs toward Terminal, WebKit’s content processes toward Safari. Expand any app to see its processes.</dd>
-        </div>
-        <div>
-          <dt>Keeps 30 days of history</dt>
-          <dd>Every metric, per app, charted for the last 12 hours, 24 hours, 7 days or 30 days, with the apps that used the most. Stored in one small file on your Mac.</dd>
-        </div>
-        <div>
-          <dt>Finds forgotten dev servers</dt>
-          <dd>Node, Python, Go, Ruby, Bun and more, grouped by project folder with the ports they hold. Idle ones are pointed out, and stopping them always asks first.</dd>
-        </div>
-        <div>
-          <dt>Tells you when an app misbehaves</dt>
-          <dd>A notification when an app keeps the CPU busy, keeps growing in memory, or writes or downloads heavily for minutes on end. You set the thresholds.</dd>
-        </div>
-        <div>
-          <dt>Lives in your menu bar</dt>
-          <dd>An icon, figures, small graphs or stacked figures, and a compact dashboard one click away. The icon turns into a warning sign when your Mac is under strain.</dd>
-        </div>
-        <div>
-          <dt>And the smaller things</dt>
-          <dd>Temperatures and fan speeds, the battery of your AirPods, mouse and keyboard, volume per app, and a share card of your Mac in light or dark.</dd>
-        </div>
-      </dl>
-    </section>
-
-    <!-- Honest comparison. -->
-    <section class="compare" aria-labelledby="compare-title">
-      <div class="section-head">
-        <h2 id="compare-title">Next to Activity Monitor</h2>
-        <p>Activity Monitor is great at this second. OpenActivity adds who is responsible, what happened while you were away, and when to look.</p>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th scope="col"><span class="visually-hidden">Feature</span></th><th scope="col">Activity Monitor</th><th scope="col">OpenActivity</th></tr>
-          </thead>
-          <tbody>
-            <tr><th scope="row">The list shows</th><td>Every process</td><td>Every app, helpers included</td></tr>
-            <tr><th scope="row">History</th><td>Live graphs</td><td>30 days, per app</td></tr>
-            <tr><th scope="row">Alerts</th><td>None</td><td>CPU, memory growth, disk, network</td></tr>
-            <tr><th scope="row">Menu bar</th><td>Dock icon graphs</td><td>Figures, graphs and a dashboard</td></tr>
-            <tr><th scope="row">Dev servers and ports</th><td>None</td><td>By project, idle ones flagged</td></tr>
-            <tr><th scope="row">Temperatures and fans</th><td>None</td><td>Included</td></tr>
-            <tr><th scope="row">Source code</th><td>Closed</td><td>MIT licensed</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Install is a real sequence, so it is numbered. -->
-    <section class="install" id="install" aria-labelledby="install-title">
-      <div class="section-head">
-        <h2 id="install-title">Install</h2>
-        <p>About a minute. OpenActivity is signed and notarized by Apple, so it opens like any app you download.</p>
-      </div>
-      <ol class="steps">
-        <li>
-          <h3>Download</h3>
-          <p>Get <code>OpenActivity.zip</code> from the <a href="https://github.com/Ffinnis/OpenActivity/releases/latest">latest release</a>.</p>
-        </li>
-        <li>
-          <h3>Move it to Applications</h3>
-          <p>Unzip it and drag OpenActivity into your Applications folder.</p>
-        </li>
-        <li>
-          <h3>Open it</h3>
-          <p>Launch it from Applications or Spotlight. macOS asks once to confirm that it came from the internet; choose Open.</p>
-        </li>
-      </ol>
-      <p class="source-note">Prefer to build it yourself? Clone the repository, open <code>OpenActivity.xcodeproj</code> in Xcode 26 and press ⌘R.</p>
-    </section>
-
-    <section class="private" aria-labelledby="private-title">
-      <h2 id="private-title">What you run stays on your Mac.</h2>
-      <p>No account, no analytics, no update checks. OpenActivity doesn’t make a single network request of its own, and its history is one SQLite file you can delete from Settings.</p>
     </section>
   </main>
 
-  <footer class="foot">
-    <div class="foot-inner">
+  <footer class="footer">
+    <div class="footer-inner">
       <a class="brand" href="./">
-        <img src="assets/icon.png" width="24" height="24" alt="">
+        <img src="assets/icon.png" width="22" height="22" alt="">
         <span>OpenActivity</span>
       </a>
-      <p>Free and open source under the <a href="https://github.com/Ffinnis/OpenActivity/blob/main/LICENSE">MIT license</a>. <a href="https://github.com/Ffinnis/OpenActivity/issues">Report an issue</a>.</p>
+      <div class="footer-links">
+        <a href="https://github.com/Ffinnis/OpenActivity">GitHub</a>
+        <a href="https://github.com/Ffinnis/OpenActivity/releases/latest">Releases</a>
+        <a href="https://github.com/Ffinnis/OpenActivity/issues">Issues</a>
+        <a href="https://github.com/Ffinnis/OpenActivity/blob/main/LICENSE">MIT license</a>
+      </div>
     </div>
   </footer>
 
